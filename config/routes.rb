@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  get '/contact1' => 'contacts#contact1'
-  get '/contacts' => 'contacts#allcontacts'
-  get '/contact_form_show_page' => 'contacts#contact_form'
+  get '/contacts' => 'contacts#index'
+  get '/contacts/new' => 'contacts#new'
+  post '/contacts' => 'contacts#create'
+  get '/contacts/:id' => 'contacts#show'
   post '/contact_form_result_page' => 'contacts#contact_form_result'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
