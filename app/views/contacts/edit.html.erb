@@ -1,0 +1,26 @@
+<h1> Edit contact: </h1>
+<%= form_tag "/contacts/#{@contact.id}", method: :patch do %>
+  <div>
+    <%= label_tag :first_name, 'first name: ' %>
+    <%= text_field_tag :first_name, @contact.first_name %>
+  </div>
+  <div>
+    <%= label_tag :last_name, 'last name: ' %>
+    <%= text_field_tag :last_name, @contact.last_name %>
+  </div>
+  <div>
+    <%= label_tag :email, 'email: ' %>
+    <%= text_field_tag :email, @contact.email %>
+  </div>
+  <div>
+    <%= label_tag :phone_number, 'phone number: ' %>
+    <%= text_field_tag :phone_number, @contact.phone_number %>
+  </div>  
+  <div>
+    <%= submit_tag 'Update contact' %>
+  </div>
+  <br>
+  <a href= "/contacts/<%=@contact.id%>">cancel</a>
+  <br>
+  <a href= "/contacts">cancel (back to all contacts)</a>
+  <% end %>
