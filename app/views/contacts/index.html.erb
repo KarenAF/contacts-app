@@ -2,5 +2,10 @@
 <% @contacts.each do |contact| %>
 <a href= "/contacts/<%=contact.id%>"><h3> <%= contact.first_name %> <%= contact.last_name %> </h3> </a>
 <h5> <%= contact.email %> <br> <%= contact.phone_number %> </h5>
-<br>
+
 <% end %>
+<h3><button type="button"><a href="/contacts/new"> Create new contact </a></button></h3>
+
+<br>
+<br>
+<p> </p>

@@ -1,6 +1,6 @@
 class ContactsController < ApplicationController
   def index
-    @contacts = Contact.all
+    @contacts = Contact.all.sort
     render 'index.html.erb'
   end
 
@@ -16,7 +16,7 @@ class ContactsController < ApplicationController
       phone_number: params[:phone_number]
     )
     contact.save
-    render 'create.html.erb'
+    redirect_to "/contacts"
   end
 
   def show
@@ -38,12 +38,12 @@ class ContactsController < ApplicationController
       phone_number: params["phone_number"]
     )
     @contact.save
-    render 'update.html.erb'
+    redirect_to "/contacts/#{@contact.id}"
   end
 
   def destroy
     @contact = Contact.find_by(id: params[:id])
     @contact.destroy
-    render 'destroy.html.erb'
+    redirect_to "/contacts"
   end
 end
