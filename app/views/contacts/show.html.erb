@@ -1,7 +1,8 @@
 <h1>Contact Information </h1>
-<h2> <%= @contact.first_name %> <%= @contact.last_name %> </h2>
-<h5> <%= @contact.email %> </h5>
-<h5> <%= @contact.phone_number %> </h5>
+<h2> <%= @contact.full_name %> </h2>
+<p> Created <%= @contact.friendly_created_at %></p> 
+<h4> <%= @contact.email %> </h4>
+<h4> <%= @contact.phone_number %> </h4>
 
 <div>
 <a href="/contacts">Back to all contacts</a>
