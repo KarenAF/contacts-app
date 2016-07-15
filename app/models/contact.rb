@@ -6,4 +6,8 @@ class Contact < ActiveRecord::Base
   def full_name
     first_name + " " + last_name
   end
+
+  def japan_phone_code
+    "(81) " + phone_number
+  end 
 end
