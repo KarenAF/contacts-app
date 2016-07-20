@@ -1,4 +1,6 @@
 class Contact < ActiveRecord::Base
+  belongs_to :user
+  
   def friendly_created_at
     created_at.strftime('%A, %d %b %Y %l:%M %p')
   end
@@ -7,6 +9,11 @@ class Contact < ActiveRecord::Base
     first_name + " " + last_name
   end
 
+  def self.find_all_johns
+    Contact.where(first_name: "John") #finds all Johns
+    #Contact.find_by(first_name: "John") only finds one instance of John.
+  end
+    
   def japan_phone_code
     "(81) " + phone_number
   end 

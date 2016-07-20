@@ -1,7 +1,14 @@
 class ContactsController < ApplicationController
   def index
-    @contacts = Contact.all.sort
-    render 'index.html.erb'
+    if current_user
+      sort_attribute = params[:sort]
+      # @contacts = Contact.order(sort_attribute)
+      @contacts = current_user.contacts.order(sort_attribute)
+      render 'index.html.erb'
+    else
+      flash[:warning] = "You must be logged in to see this page."
+      redirect_to '/login'
+    end
   end
 
   def new
@@ -15,7 +22,8 @@ class ContactsController < ApplicationController
       last_name: params[:last_name],
       email: params[:email],
       phone_number: params[:phone_number],
-      bio: params[:bio]
+      bio: params[:bio],
+      user_id: current_user.id
     )
     contact.save
     redirect_to "/contacts"
