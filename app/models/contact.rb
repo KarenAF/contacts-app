@@ -2,6 +2,11 @@ class Contact < ActiveRecord::Base
   belongs_to :user
   has_many :grouped_contacts
   has_many :groups, through: :grouped_contacts 
+
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+  validates :email, presence: true
+  validates :email, uniqueness: true
   
   def friendly_created_at
     created_at.strftime('%A, %d %b %Y %l:%M %p')

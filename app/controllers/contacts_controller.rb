@@ -1,10 +1,17 @@
 class ContactsController < ApplicationController
   def index
     if current_user
-      sort_attribute = params[:sort]
-      # @contacts = Contact.order(sort_attribute)
-      @contacts = current_user.contacts.order(sort_attribute)
-      render 'index.html.erb'
+      if params[:sort]
+        sort_attribute = params[:sort]
+        # @contacts = Contact.order(sort_attribute)
+        @contacts = current_user.contacts.order(sort_attribute)
+        render 'index.html.erb'
+      elsif params[:group_id]
+        selected_group = Group.find_by(id: params[:group_id])
+        @contacts = selected_group.contacts
+      else 
+        @contacts = current_user.contacts
+      end   
     else
       flash[:warning] = "You must be logged in to see this page."
       redirect_to '/login'
@@ -12,11 +19,12 @@ class ContactsController < ApplicationController
   end
 
   def new
+    @contact = Contact.new
     render 'new.html.erb'
   end
 
   def create
-    contact = Contact.new(
+    @contact = Contact.new(
       first_name: params[:first_name],
       middle_name: params[:middle_name],
       last_name: params[:last_name],
@@ -25,8 +33,11 @@ class ContactsController < ApplicationController
       bio: params[:bio],
       user_id: current_user.id
     )
-    contact.save
-    redirect_to "/contacts"
+    if @contact.save
+      redirect_to "/contacts"
+    else
+      render 'new.html.erb'
+    end
   end
 
   def show
@@ -49,8 +60,11 @@ class ContactsController < ApplicationController
       phone_number: params["phone_number"],
       bio: params["bio"]
     )
-    @contact.save
-    redirect_to "/contacts/#{@contact.id}"
+    if @contact.save
+      redirect_to "/contacts/#{@contact.id}"
+    else 
+      render 'edit.html.erb'
+    end
   end
 
   def destroy

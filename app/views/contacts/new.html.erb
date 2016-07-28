@@ -1,28 +1,43 @@
 <h1> Create new contact: </h1>
+
+<% if @contact.errors.any? %>
+
+   <div id="error_explanation">
+     <h5><%= pluralize(@contact.errors.count, "error") %> prohibited this contact from being saved:</h5>
+  
+     <ul>
+     <% @contact.errors.full_messages.each do |msg| %>
+       <li><%= msg %></li>
+     <% end %>
+     </ul>
+   </div>
+ <% end %>
+
+
 <%= form_tag '/contacts', method: :post do %>
   <div>
     <%= label_tag :first_name, 'first name: ' %>
-    <%= text_field_tag :first_name %>
+    <%= text_field_tag :first_name, @contact.first_name %>
   </div>
   <div>
     <%= label_tag :middle_name, 'middle_name: ' %>
-    <%= text_field_tag :middle_name %>
+    <%= text_field_tag :middle_name, @contact.middle_name%>
   </div>
   <div>
     <%= label_tag :last_name, 'last name: ' %>
-    <%= text_field_tag :last_name %>
+    <%= text_field_tag :last_name, @contact.last_name %>
   </div>
   <div>
     <%= label_tag :email, 'email: ' %>
-    <%= text_field_tag :email %>
+    <%= text_field_tag :email, @contact.email %>
   </div>
   <div>
     <%= label_tag :phone_number, 'phone number: ' %>
-    <%= text_field_tag :phone_number %>
+    <%= text_field_tag :phone_number, @contact.phone_number %>
   </div> 
   <div>
     <%= label_tag :bio, 'bio: ' %>
-    <%= text_field_tag :bio %>
+    <%= text_field_tag :bio, @contact.bio %>
   </div> 
   <div>
     <%= submit_tag 'Submit' %>
