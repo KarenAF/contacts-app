@@ -34,6 +34,7 @@ class ContactsController < ApplicationController
       user_id: current_user.id
     )
     if @contact.save
+      flash[:success] = "Contact added!"      
       redirect_to "/contacts"
     else
       render 'new.html.erb'
@@ -61,6 +62,7 @@ class ContactsController < ApplicationController
       bio: params["bio"]
     )
     if @contact.save
+      flash[:success] = "Contact updated!"
       redirect_to "/contacts/#{@contact.id}"
     else 
       render 'edit.html.erb'
